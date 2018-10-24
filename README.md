@@ -4,10 +4,10 @@
 Yet Another Vault Unsealer, unseals independent vault instances.
 
 But why?<br/>
-yavu reads the the unseal key from vault *A* to unseal vault *B*.<br\>
+yavu reads the unseal key from vault *A* to unseal vault *B*.<br\>
 Vault *A* must be unsealed to unseal vault *B*.<br/>
 The unseal key is "not stored" in memory, every unseal try of vault B reads the unseal token from vault A.<br/>
-The vault infrasturcture can be sealed without the requriment to kill the unseal processes.<br/>
+The vault infrastructure can be sealed without the requirement to kill the unseal processes.<br/>
 
 ## Usage
 ```
