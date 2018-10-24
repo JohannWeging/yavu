@@ -13,5 +13,5 @@ COPY --from=builder /go/bin/yavu /usr/bin
 RUN set -x \
  && createuser yavu
  
-ENTRYPOINT ["/usr/bin/dumb-init" "--"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["yavu"]
