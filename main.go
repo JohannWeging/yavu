@@ -11,13 +11,13 @@ import (
 )
 
 var config = struct {
-	CheckInterval    time.Duration `flag:"check-interval" default:"60s" description:"interval to check the vault"`
-	SourceVaultAddr  string        `flag:"source-vault-addr" description:"vault address to read the unseal key from"`
-	SourceRoleID     string        `flag:"source-role-id" description:"role id to authenticate at the source vault"`
-	SourceSecretID   string        `flag:"source-secret-id" description:"secret id to authenticate at the source vault"`
-	TargetVaultAddr  string        `flag:"target-vault-addr" description:"vault address of the instance to unseal"`
-	UnsealTokensPath string        `flag:"unseal-token-path" description:"where to read the unseal tokens from"`
-	UnsealTokenKeys  []string      `flag:"unseal-token-keys" description:"list unseal keys in the secret path"`
+	CheckInterval   time.Duration `flag:"check-interval" default:"60s" description:"interval to check the vault"`
+	SourceVaultAddr string        `flag:"source-vault-addr" description:"vault address to read the unseal key from"`
+	SourceRoleID    string        `flag:"source-role-id" description:"role id to authenticate at the source vault"`
+	SourceSecretID  string        `flag:"source-secret-id" description:"secret id to authenticate at the source vault"`
+	TargetVaultAddr string        `flag:"target-vault-addr" description:"vault address of the instance to unseal"`
+	UnsealTokenPath string        `flag:"unseal-token-path" description:"where to read the unseal tokens from"`
+	UnsealTokenKeys []string      `flag:"unseal-token-keys" description:"list unseal keys in the secret path"`
 }{}
 
 func main() {
@@ -63,8 +63,8 @@ func readUnsealTokens() (tokens []string, err error) {
 		return nil, errors.New("authentication token is nil")
 	}
 	client.SetToken(loginSecret.Auth.ClientToken)
-	logFields["unseal_tokens_path"] = config.UnsealTokensPath
-	secret, err := client.Logical().Read(config.UnsealTokensPath)
+	logFields["unseal_token_path"] = config.UnsealTokenPath
+	secret, err := client.Logical().Read(config.UnsealTokenPath)
 	if err != nil {
 		return nil, errors.Annotate(err, "failed to read unseal tokens")
 	}
