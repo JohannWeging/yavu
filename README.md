@@ -1,3 +1,5 @@
+[![Build Status](https://ci.sysexit.com/api/badges/JohannWeging/yavu/status.svg)](https://ci.sysexit.com/JohannWeging/yavu) [![Docker Hub](https://img.shields.io/badge/docker-container-blue.svg?longCache=true&style=flat-square)](https://hub.docker.com/r/johannweging/yavu) [![GitHub](https://img.shields.io/badge/github-repo-blue.svg?longCache=true&style=flat-square)](https://github.com/JohannWeging/yavu)
+
 # yavu
 Yet Another Vault Unsealer, unseals independent vault instances.
 
@@ -9,15 +11,15 @@ The vault infrasturcture can be sealed without the requriment to kill the unseal
 
 ## Usage
 ```
-yavu --source-vault-addr=http://vault.A 
-  --source-role-id=foo-bar  
+yavu --source-vault-addr=http://vault.A
+  --source-role-id=foo-bar
   --unseal-token-path=secret/vault-b-unseal
   --unseal-token-keys=key1,key2
   --target-vault-addr=http://vault.B
 ```
 Or with Docker
 ```
-docker run 
+docker run
   -e SOURCE_VAULT_ADDR=http://vault.A
   -e SOURCE_ROLE_ID=foo-bar
   -e UNSEAL_TOKEN_PATH=secret/vault-b-unseal
@@ -25,7 +27,7 @@ docker run
   -e TARGET_VAULT_ADDR=http://vault.B
   johannweging/yavu
 ```
-Run reference 
+Run reference
 ```
 Usage of yavu:
       --check-interval duration     interval to check the vault (default 1m0s)
