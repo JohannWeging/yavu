@@ -68,8 +68,12 @@ func readUnsealTokens() (tokens []string, err error) {
 	if err != nil {
 		return nil, errors.Annotate(err, "failed to read unseal tokens")
 	}
+	if secret == nil {
+		return nil, errors.New("secret is nil")
+	}
+
 	if secret.Data == nil {
-		return nil, errors.New("secret data is nil")
+		return nil, errors.Errorf("secret data is nil")
 	}
 	for _, key := range config.UnsealTokenKeys {
 		logFields["unseal_key"] = key
@@ -122,7 +126,7 @@ func unseal(client *vault.Client) (err error) {
 	}
 	tokens, err := readUnsealTokens()
 	if err != nil {
-		return
+		return err
 	}
 	for _, t := range tokens {
 		resp, err := client.Sys().Unseal(t)
