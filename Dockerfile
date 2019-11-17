@@ -1,17 +1,20 @@
 FROM golang:alpine AS builder
 
-COPY . /go/src/github.com/JohannWeging/yavu
-WORKDIR /go/src/github.com/JohannWeging/yavu
+COPY . /go/src/github.com/yoo/yavu
+WORKDIR /go/src/github.com/yoo/yavu
 
 RUN set -x \
- && go install github.com/JohannWeging/yavu
+ && go install -mod=vendor github.com/yoo/yavu
 
-FROM johannweging/base-alpine:latest
+FROM alpine:latest
 
 COPY --from=builder /go/bin/yavu /usr/bin
 
 RUN set -x \
- && createuser yavu
+ && apk add --update --no-cache dumb-init ca-certificates \
+ && adduser -D yavu
  
+USER yavu
+
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["yavu"]
+CMD ["/usr/bin/yavu"]
