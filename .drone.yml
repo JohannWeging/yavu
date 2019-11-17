@@ -1,6 +1,0 @@
-pipeline:
-  docker:
-    image: plugins/docker
-    repo: johannweging/yavu
-    tags: latest
-    secrets: [docker_username, docker_password]
