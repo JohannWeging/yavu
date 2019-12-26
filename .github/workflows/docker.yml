@@ -7,9 +7,9 @@ jobs:
     - uses: "actions/checkout@v1"
     - name: "Build Docker Image"
       "run": |
-        docker login -u yoo -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com/$GITHUB_REPOSITORY
-        docker build -t docker.pkg.github.com/$GITHUB_REPOSITORY/yavu:latest .
-        docker push docker.pkg.github.com/$GITHUB_REPOSITORY/yavu:latest
+        docker login -u {{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }} quay.io
+        docker build -t quay.io/johannweging/yavu:latest .
+        docker push quay.io/johannweging/yavu:latest
 
 on:
   push:
